@@ -1,0 +1,18 @@
+steps:
+- task: HelmDeploy@0
+  displayName: 'helm upgrade'
+  inputs:
+    connectionType: 'Kubernetes Service Connection'
+    kubernetesServiceConnection: 'qa-go-template-cluster01-qa-go-template-1631482953813'
+    namespace: 'qa-go-template'
+    command: install
+    chartType: FilePath
+    chartPath: 'charts/go-template'
+    releaseName: 'my-go-template'
+    overrideValues: 'image.repository=acrsoufiane.azurecr.io/go-template,image.tag=f5a89a7a932890b4c08feb8d9e4d8ffde527182d '
+  env:
+    k8sNamespace: qa-go-template
+    registryServerName: acrsoufiane.azurecr.io
+    imgVersion: f5a89a7a932890b4c08feb8d9e4d8ffde527182d
+    projectName: go-template
+    replicas: 2
